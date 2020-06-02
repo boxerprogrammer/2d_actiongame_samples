@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A7C7355D-3863-4824-826A-EF6514FE9F2A}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>splatter_villedge</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(DXLIB_DIR)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(DXLIB_DIR)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(DXLIB_DIR)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(DXLIB_DIR)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="3D\Model3D.cpp" />
+    <ClCompile Include="application.cpp" />
+    <ClCompile Include="EasyScript\NovelExecutor.cpp" />
+    <ClCompile Include="EasyScript\NovelReader.cpp" />
+    <ClCompile Include="EasyScript\TextDrawer.cpp" />
+    <ClCompile Include="File\KFile.cpp" />
+    <ClCompile Include="Game\BloodSplash.cpp" />
+    <ClCompile Include="Game\Bullet.cpp" />
+    <ClCompile Include="Game\Camera.cpp" />
+    <ClCompile Include="Game\Character.cpp" />
+    <ClCompile Include="Game\CollisionDetector.cpp" />
+    <ClCompile Include="Game\EffectBase.cpp" />
+    <ClCompile Include="Game\Enemy.cpp" />
+    <ClCompile Include="Game\GameItem.cpp" />
+    <ClCompile Include="Game\GameObject.cpp" />
+    <ClCompile Include="Game\HitEffect.cpp" />
+    <ClCompile Include="Game\Player.cpp" />
+    <ClCompile Include="Game\Shot.cpp" />
+    <ClCompile Include="Game\Solid.cpp" />
+    <ClCompile Include="Game\Stage.cpp" />
+    <ClCompile Include="Geometry\geometry.cpp" />
+    <ClCompile Include="Graphics\BaseDrawer.cpp" />
+    <ClCompile Include="Graphics\BlinkDrawer.cpp" />
+    <ClCompile Include="Graphics\FragmentDrawer.cpp" />
+    <ClCompile Include="Graphics\GraphicsUpdater.cpp" />
+    <ClCompile Include="Graphics\LagDrawer.cpp" />
+    <ClCompile Include="Graphics\TileDrawer.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="scene\AfterStage.cpp" />
+    <ClCompile Include="scene\BeforeStage.cpp" />
+    <ClCompile Include="scene\ClearScene.cpp" />
+    <ClCompile Include="scene\GamePlaying.cpp" />
+    <ClCompile Include="scene\GameScene.cpp" />
+    <ClCompile Include="scene\OpeningScene.cpp" />
+    <ClCompile Include="scene\SceneManager.cpp" />
+    <ClCompile Include="scene\TitleScene.cpp" />
+    <ClCompile Include="Sound\BackMusic.cpp" />
+    <ClCompile Include="Sound\BGMManager.cpp" />
+    <ClCompile Include="Sound\SoundEffect.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="3D\Model3D.h" />
+    <ClInclude Include="application.h" />
+    <ClInclude Include="EasyScript\NovelExecutor.h" />
+    <ClInclude Include="EasyScript\NovelReader.h" />
+    <ClInclude Include="EasyScript\TextDrawer.h" />
+    <ClInclude Include="File\KFile.h" />
+    <ClInclude Include="Game\BloodSplash.h" />
+    <ClInclude Include="Game\Bullet.h" />
+    <ClInclude Include="Game\Camera.h" />
+    <ClInclude Include="Game\Character.h" />
+    <ClInclude Include="Game\CollisionDetector.h" />
+    <ClInclude Include="Game\EffectBase.h" />
+    <ClInclude Include="Game\Enemy.h" />
+    <ClInclude Include="Game\GameItem.h" />
+    <ClInclude Include="Game\GameObject.h" />
+    <ClInclude Include="Game\HitEffect.h" />
+    <ClInclude Include="Game\Player.h" />
+    <ClInclude Include="Game\Shot.h" />
+    <ClInclude Include="Game\Solid.h" />
+    <ClInclude Include="Game\Stage.h" />
+    <ClInclude Include="Geometry\geometry.h" />
+    <ClInclude Include="Graphics\BaseDrawer.h" />
+    <ClInclude Include="Graphics\BlinkDrawer.h" />
+    <ClInclude Include="Graphics\Drawer.h" />
+    <ClInclude Include="Graphics\FragmentDrawer.h" />
+    <ClInclude Include="Graphics\GraphicsUpdater.h" />
+    <ClInclude Include="Graphics\LagDrawer.h" />
+    <ClInclude Include="Graphics\TileDrawer.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="scene\AfterStage.h" />
+    <ClInclude Include="scene\BeforeStage.h" />
+    <ClInclude Include="scene\ClearScene.h" />
+    <ClInclude Include="scene\GamePlaying.h" />
+    <ClInclude Include="scene\GameScene.h" />
+    <ClInclude Include="scene\OpeningScene.h" />
+    <ClInclude Include="scene\SceneManager.h" />
+    <ClInclude Include="scene\TitleScene.h" />
+    <ClInclude Include="Sound\BackMusic.h" />
+    <ClInclude Include="Sound\BGMManager.h" />
+    <ClInclude Include="Sound\SoundEffect.h" />
+    <ClInclude Include="system\count_base.h" />
+    <ClInclude Include="system\refcountable.h" />
+    <ClInclude Include="system\scoped_ptr.h" />
+    <ClInclude Include="system\shared_ptr.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="splatter_village.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\dokuro.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
