@@ -6,7 +6,7 @@
 #include"../3D/Model3D.h"
 #include"Player.h"
 #include"Shot.h"
-
+#include<cassert>
 ///“G‹““®‹æ•ª(‚Ç‚Ì‚æ‚¤‚ÈŠG‚ð•\Ž¦‚·‚é‚Ì‚©)
 enum ActionKbn{
 	act_normal,
@@ -159,6 +159,8 @@ Enemy2D::Draw(){
 			if(_animTurn){
 				idx=abs(_idx-(_handles[_key].num-1));
 			}
+			assert(idx >= 0);
+			assert(idx < _handles[_key].num);
 			DxLib::DrawRectGraph(_pos.x-_camera.CurrentPos().x,_pos.y-_camera.CurrentPos().y,idx*_w,0,_w,_h,_handles[_key].handle,true,_turn);
 		}else{
 			DxLib::DrawRectGraph(_pos.x-_camera.CurrentPos().x,_pos.y-_camera.CurrentPos().y,0,0,_w,_h,_handles[_key].handle,true,_turn);
@@ -272,8 +274,10 @@ class Dokuro : public Enemy2D{
 					}
 					if(_waitTimer+1==_handles[_key].interval && _idx+1==_handles[_key].num){
 						_updater=&Dokuro::UpdateNeutral;
-						_key=act_normal;
-						_waitTimer=0;
+						_key = act_normal;
+						_waitTimer = 0;
+						_idx = 0;
+
 					}
 				}
 			}
@@ -576,21 +580,28 @@ EnemyFactory::Create(const char* name,EnemyType type){
 			int csvHandle = DxLib::FileRead_open(strName.c_str());
 			char buffer[256];
 			int num=0;
-			while(DxLib::FileRead_gets(buffer,256,csvHandle)!=-1){
-				++num;
+			while (DxLib::FileRead_gets(buffer, 256, csvHandle) != -1) {
+				int frame = 0;
+				auto ret = sscanf(buffer, "\"%d\"", &frame);
+				if (ret == std::char_traits<char>::eof()) {
+					continue;
+				}
+				if(frame>0){
+					++num;
+				}
 			}
 			DxLib::FileRead_close(csvHandle);
 			int w,h;
 			DxLib::GetGraphSize(handle,&w,&h);
 			switch(type){
 				case enm_dokuro:
-					return new Dokuro(_camera,_player,handle,w/(num-1),h,num-1,*this);
+					return new Dokuro(_camera,_player,handle,w/num,h,num,*this);
 				case enm_crow:
-					return new Crow(_camera,_player,handle,w/(num-1),h,num-1,*this);
+					return new Crow(_camera,_player,handle,w/num,h,num,*this);
 				case enm_lipman:
-					return new LipMan(_camera,_player,handle,w/(num-1),h,num-1,*this);
+					return new LipMan(_camera,_player,handle,w/num,h,num,*this);
 				default:
-					return new Enemy2D(_camera,handle,w/(num-1),h,num-1,*this,8,true);
+					return new Enemy2D(_camera,handle,w/num,h,num,*this,8,true);
 				
 			}
 		}

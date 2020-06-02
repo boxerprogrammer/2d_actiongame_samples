@@ -94,7 +94,7 @@ FragmentDrawer::Draw(){
 
 	//”j•Ð•`‰æ
 	if(_breaking){
-		DxLib::DrawPolygon(&_vertices[0],_vertices.size()/3,_capHandle,true,true);
+		DxLib::DrawPolygon(_vertices.data(),_vertices.size()/3,_capHandle,false,true);
 		std::vector<Fragment>::iterator it=_fragments.begin();
 		for(;it!=_fragments.end();++it){
 			it->Fall();
