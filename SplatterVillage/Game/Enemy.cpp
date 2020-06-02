@@ -577,20 +577,7 @@ EnemyFactory::Create(const char* name,EnemyType type){
 			std::string::size_type pos=strName.find(ext);
 			const char* csv=".csv";
 			strName.replace(strName.begin()+pos,strName.end(),csv,csv+sizeof(csv));
-			int csvHandle = DxLib::FileRead_open(strName.c_str());
-			char buffer[256];
-			int num=0;
-			while (DxLib::FileRead_gets(buffer, 256, csvHandle) != -1) {
-				int frame = 0;
-				auto ret = sscanf(buffer, "\"%d\"", &frame);
-				if (ret == std::char_traits<char>::eof()) {
-					continue;
-				}
-				if(frame>0){
-					++num;
-				}
-			}
-			DxLib::FileRead_close(csvHandle);
+			int num = GetPictureNumForOneAnimation(strName);
 			int w,h;
 			DxLib::GetGraphSize(handle,&w,&h);
 			switch(type){
@@ -606,6 +593,25 @@ EnemyFactory::Create(const char* name,EnemyType type){
 			}
 		}
 	}
+}
+
+int EnemyFactory::GetPictureNumForOneAnimation(std::string& strName)
+{
+	int num = 0;
+	int csvHandle = DxLib::FileRead_open(strName.c_str());
+	char buffer[256];
+	while (DxLib::FileRead_gets(buffer, 256, csvHandle) != -1) {
+		int frame = 0;
+		auto ret = sscanf(buffer, "\"%d\"", &frame);
+		if (ret == std::char_traits<char>::eof()) {
+			continue;
+		}
+		if (frame>0) {
+			++num;
+		}
+	}
+	DxLib::FileRead_close(csvHandle);
+	return num;
 }
 
 void EnemyFactory::SetAppearAction(Enemy* enemy,const char* name){
@@ -625,16 +631,10 @@ void EnemyFactory::SetAppearAction(Enemy* enemy,const char* name){
 		std::string::size_type pos=strName.find(ext);
 		const char* csv=".csv";
 		strName.replace(strName.begin()+pos,strName.end(),csv,csv+sizeof(csv));
-		int csvHandle = DxLib::FileRead_open(strName.c_str());
-		char buffer[256];
-		int num=0;
-		while(DxLib::FileRead_gets(buffer,256,csvHandle)!=-1){
-			++num;
-		}
-		DxLib::FileRead_close(csvHandle);
+		int num = GetPictureNumForOneAnimation(strName);
 		int w,h;
 		DxLib::GetGraphSize(handle,&w,&h);
-		enemy->SetAppearAction(handle,num-1,10);
+		enemy->SetAppearAction(handle,num,10);
 	}
 }
 

@@ -17,6 +17,7 @@ enum PlayerState{
 class Player{
 
 private:
+	ScopedPtr<SoundEffect> _damageSE;//ダメージSE
 	ScopedPtr<SoundEffect> _deadSE;//断末魔SE
 	ScopedPtr<SoundEffect> _throwSE;//なげSE
 	ScopedPtr<SoundEffect> _jumpSE;//ジャンプSE

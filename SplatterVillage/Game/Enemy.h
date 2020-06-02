@@ -175,6 +175,8 @@ class EnemyFactory{
 		///@note 同名ファイルを指定された場合は、その名前を元にロード済みの画像を使う
 		Enemy* Create(const char* name ,EnemyType type=enm_enemy);
 
+		int GetPictureNumForOneAnimation(std::string& strName);
+
 		///発生時のアクションに関連するファイルを登録する
 		///@param enemy 登録したい敵オブジェクト
 		///@param filename ファイル名

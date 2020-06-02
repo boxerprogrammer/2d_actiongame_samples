@@ -26,7 +26,8 @@ Player::Player() : _position(300,640),
 	_model.Reset(new Model3D("model/inock/inock.x"));
 	_modelN.Reset(new Model3D("model/inock/inock_naked.x"));
 	_modelD.Reset(new Model3D("model/inock/inock_dead.x"));
-	_deadSE.Reset(new SoundEffect("snd/osb/death.wav"));
+	_damageSE.Reset(new SoundEffect("snd/osb/yurusite.wav"));
+	_deadSE.Reset(new SoundEffect("snd/osb/hoa-.wav"));
 	_throwSE.Reset(new SoundEffect("snd/osb/throw.wav"));
 	_jumpSE.Reset(new SoundEffect("snd/voice/jump.wav"));
 	_model->SetScale(0.75f);
@@ -47,10 +48,12 @@ Player::CrashEffect(const Camera& camera){
 		int x = _position.x-camera.CurrentPos().x + _rect.size.w;
 		int y = _position.y-camera.CurrentPos().y + _rect.size.h;
 
-		DrawCircle(x-offset,y-offset,radius,0xffffff);
-		DrawCircle(x-offset,y+offset,radius,0xffffff);
-		DrawCircle(x+offset,y-offset,radius,0xffffff);
-		DrawCircle(x+offset,y+offset,radius,0xffffff);
+		if (_pst != pst_dying) {
+			DrawCircle(x - offset, y - offset, radius, 0xffffff);
+			DrawCircle(x - offset, y + offset, radius, 0xffffff);
+			DrawCircle(x + offset, y - offset, radius, 0xffffff);
+			DrawCircle(x + offset, y + offset, radius, 0xffffff);
+		}
 
 		if(_crashTimer==0&&_pst==pst_dying){
 			_pst=pst_dead;
@@ -269,7 +272,7 @@ Player::OnDamaged(){
 	_isPrejumping=false;
 	_isGround=false;
 	_pst = pst_naked;
-	_deadSE->Play();
+	_damageSE->Play();
 	_crashTimer=30;
 	_ultimateTimer=120;
 }
@@ -294,7 +297,7 @@ Player::OnDead(){
 	_isGround=false;
 	_pst = pst_dying;
 	_deadSE->Play();
-	_crashTimer=60;
+	_crashTimer=120;
 }
 
 void 
@@ -340,6 +343,7 @@ Player::KillMe(){
 
 void 
 Player::OnHitEnemy(){
+	if (_pst == pst_dying || _pst==pst_dead)return;
 	if(_pst==pst_armor){
 		OnDamaged();
 	}else{
